@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -41,6 +42,13 @@ public class UserController {
                     existing.setName(u.getName());
                     return ResponseEntity.ok(service.save(existing));
                 })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PatchMapping("/user/{id}")
+    public ResponseEntity<UserEntity> update(@PathVariable Long id, @RequestBody Map<String, Object> update) {
+        return service.patchUser(id, update)
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
