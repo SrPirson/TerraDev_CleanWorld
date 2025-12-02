@@ -1,15 +1,16 @@
 import "./App.css";
 import WorldMap from "./assets/worldmap.webp";
+import Cloud from "./assets/cloud.png";
 
 function App() {
   return (
     <>
-      <div className="bg-gradient-to-r from-blue-200 to-blue-100 h-[100vh] flex justify-center relative overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-200 to-blue-100 h-[100vh] flex justify-center relative overflow-hidden ">
         <div className="text-white mt-20">
           <span className="text-2xl font-medium drop-shadow-[1px_1px_0px_gray]">
             Welcome to
           </span>
-          <h1 className="text-9xl font-bold drop-shadow-[1px_3px_1px_gray]">
+          <h1 className="text-9xl font-bold drop-shadow-[1px_3px_1px_gray] z-60">
             CleanWorld
           </h1>
           
@@ -23,6 +24,18 @@ function App() {
           src={WorldMap}
           className="h-220 w-220 spin absolute top-[50vh] z-10"
         ></img>
+
+{/* DERECHA */}
+        <img src={Cloud} className="h-100 w-400 absolute top-[20vh] right-[-20vh] rotate-[-18deg] z-1"></img>
+
+        <img src={Cloud} className="h-100 w-400 absolute top-[35vh] right-[-54vh] rotate-[-18deg] z-1"></img>
+        
+
+{/* IZQUIERDA */}
+         <img src={Cloud} className="h-100 w-400 absolute top-[25vh] left-[-50vh] rotate-[16deg] z-1"></img>
+      
+         <img src={Cloud} className="h-100 w-400 absolute top-[50vh] left-[-40vh] rotate-[20deg] z-1"></img>
+      
       </div>
     </>
   );
