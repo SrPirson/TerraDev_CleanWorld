@@ -1,4 +1,7 @@
 package com.terradev.cleanWorld.repository;
 
-public interface ZoneRepository {
+import com.terradev.cleanWorld.entity.ZoneEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ZoneRepository extends JpaRepository<ZoneEntity, Long> {
 }

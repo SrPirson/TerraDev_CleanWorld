@@ -45,7 +45,7 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PatchMapping("/user/{id}")
+    @PatchMapping("/edit/{id}")
     public ResponseEntity<UserEntity> update(@PathVariable Long id, @RequestBody Map<String, Object> update) {
         return service.patchUser(id, update)
                 .map(ResponseEntity::ok)
