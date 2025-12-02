@@ -13,10 +13,17 @@ function App() {
           <h1 className="text-9xl font-bold drop-shadow-[1px_3px_1px_gray] z-60">
             CleanWorld
           </h1>
-          
+
           <div className="flex justify-center mt-5">
-            <button className="border-3 border-neutral-400 px-3 py-2 bg-neutral-100 rounded-full mr-5 text-neutral-700 hover:scale-105 transition cursor-pointer">Sign In</button>
-            <button className="border-3 border-gray-400 px-3 py-2 bg-neutral-500 rounded-full hover:scale-105 transition cursor-pointer">Register</button>
+            <button
+              className="border-3 border-neutral-400 px-3 py-2 bg-neutral-100 rounded-full mr-5 text-neutral-700 hover:scale-105 transition cursor-pointer"
+              src="./components/Login.jsx"
+            >
+              Sign In
+            </button>
+            <button className="border-3 border-gray-400 px-3 py-2 bg-neutral-500 rounded-full hover:scale-105 transition cursor-pointer">
+              Register
+            </button>
           </div>
         </div>
 
@@ -25,17 +32,27 @@ function App() {
           className="h-220 w-220 spin absolute top-[50vh] z-10"
         ></img>
 
-{/* DERECHA */}
-        <img src={Cloud} className="h-100 w-400 absolute top-[20vh] right-[-20vh] rotate-[-18deg] z-1"></img>
+        {/* DERECHA */}
+        <img
+          src={Cloud}
+          className="h-100 w-400 absolute top-[20vh] right-[-20vh] rotate-[-18deg] z-1"
+        ></img>
 
-        <img src={Cloud} className="h-100 w-400 absolute top-[35vh] right-[-54vh] rotate-[-18deg] z-1"></img>
-        
+        <img
+          src={Cloud}
+          className="h-100 w-400 absolute top-[35vh] right-[-54vh] rotate-[-18deg] z-1"
+        ></img>
 
-{/* IZQUIERDA */}
-         <img src={Cloud} className="h-100 w-400 absolute top-[25vh] left-[-50vh] rotate-[16deg] z-1"></img>
-      
-         <img src={Cloud} className="h-100 w-400 absolute top-[50vh] left-[-40vh] rotate-[20deg] z-1"></img>
-      
+        {/* IZQUIERDA */}
+        <img
+          src={Cloud}
+          className="h-100 w-400 absolute top-[25vh] left-[-50vh] rotate-[16deg] z-1"
+        ></img>
+
+        <img
+          src={Cloud}
+          className="h-100 w-400 absolute top-[50vh] left-[-40vh] rotate-[20deg] z-1"
+        ></img>
       </div>
     </>
   );
