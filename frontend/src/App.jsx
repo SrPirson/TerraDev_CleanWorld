@@ -1,6 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
-import NavBar from './components/NavBar'
+
+// Leaflet
+import "leaflet/dist/leaflet.css";
+
+// Pages
+import MapaPage from './pages/Map.jsx';
+
+// Components
 import Footer from './components/Footer'
 
 function App() {
@@ -8,13 +15,17 @@ function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen flex flex-col">
-        <NavBar />
         <main className="grow">
           <Routes>
-            <Route path="/" element={<p className="font-bold border-2 text-amber-300">Mondongo</p>} />
-          </Routes>
+            <Route path="/" element={
+			  <div className="min-h-screen flex flex-col">
+                <div className="grow"></div>
+                <Footer />
+              </div>
+			} />
+			<Route path="/mapa" element={<MapaPage />} />
+		  </Routes>
         </main>
-        <Footer />
       </div>
     </BrowserRouter>
   )
