@@ -1,5 +1,6 @@
-import WorldMap from "./assets/worldmap.webp";
-import Cloud from "./assets/cloud.png";
+import WorldMap from "../assets/worldmap.webp";
+import Cloud from "../assets/cloud.png";
+import Footer from "../components/Footer";
 
 function Home() {
   return (
@@ -53,6 +54,7 @@ function Home() {
           className="h-100 w-400 absolute top-[50vh] left-[-40vh] rotate-[20deg] z-1"
         ></img>
       </div>
+	  <Footer />
     </>
   );
 }
