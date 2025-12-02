@@ -53,7 +53,7 @@ public class UserController {
         return service.findById(id)
                 .map(n -> {
                     service.deleteById(id);
-                    return ResponseEntity.ok().build();
+                    return ResponseEntity.ok().<Void>build();
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
