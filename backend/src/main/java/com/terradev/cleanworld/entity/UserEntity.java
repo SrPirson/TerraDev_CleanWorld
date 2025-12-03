@@ -8,6 +8,9 @@ import lombok.Setter;
 @Table(name = "user")
 @Getter @Setter
 public class UserEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false)
     private String name;
