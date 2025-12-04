@@ -11,7 +11,7 @@ export default function NavBar() {
 				<li><Link to="/mapa" className="p-2 hover:underline">Mapa</Link></li>
 				<li><Link to="/zonas" className="p-2 hover:underline">Zonas</Link></li>
 				<li><Link to="/eventos" className="p-2 hover:underline">Eventos</Link></li>
-				<li><Link to="/perfil" className="p-2 hover:underline">Perfil</Link></li>
+				<li><Link to="/profile" className="p-2 hover:underline">Perfil</Link></li>
 			</ul>
 			<button><Link to="/mapa?report=true" className="p-2 rounded-xl bg-brand-light text-brand-dark font-bold transition-colors hover:bg-white">+ Reportar</Link></button>
 		</nav>
