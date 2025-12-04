@@ -26,7 +26,8 @@ function Home() {
             >
               Sign In
             </button>
-            <button className="border-3 border-gray-400 px-3 py-2 bg-neutral-500 rounded-full hover:scale-105 transition cursor-pointer">
+            <button className="border-3 border-gray-400 px-3 py-2 bg-neutral-500 rounded-full hover:scale-105 transition cursor-pointer"
+            onClick={() => navigate('/register')}>
               Register
             </button>
           </div>
