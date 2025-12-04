@@ -1,6 +1,7 @@
 import WorldMap from "../assets/worldmap.webp";
 import Cloud from "../assets/cloud.png";
 import Footer from "../components/Footer";
+import Register from "../pages/Register.jsx";
 import Login from "./Login";
 import { useNavigate } from 'react-router-dom'
 
