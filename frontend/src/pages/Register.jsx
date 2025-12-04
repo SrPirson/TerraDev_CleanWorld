@@ -1,10 +1,15 @@
 import Happy from '../assets/thx.jpg'
 import Login from "./Login"
+
+import Navbar from '../components/NavBar';
+import Footer from "../components/Footer";
 import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
 const navigate = useNavigate();
   return (
+    <>
+    <Navbar/>
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-blue-50 to-[#AFBF75]">
 
       <div className="bg-white border-2 border-gray-300 rounded-xl shadow-lg p-8 md:p-10 
@@ -97,5 +102,8 @@ const navigate = useNavigate();
       </div>
 
     </div>
+
+    <Footer/>
+    </>
   );
 }
