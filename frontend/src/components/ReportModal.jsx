@@ -63,13 +63,21 @@ export default function ReportModal({ isReportMode, reportCoords, onClose, onSub
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Convertir severity numérico a string para BD
+    const severityMap = { 1: 'LOW', 2: 'MEDIUM', 3: 'HIGH' };
+    
     onSubmit({
       id: `user-report-${Date.now()}`,
-      ...formData,
-      images: images.map(img => img.file),
+      title: formData.title,
+      description: formData.description,
+      severity: severityMap[formData.severity],
+      img_url: images.length > 0 ? URL.createObjectURL(images[0].file) : null,
+      after_img_url: null,
       latitude: reportCoords.lat,
       longitude: reportCoords.lng,
-      status: 'pending',
+      status: 'SUCIO',
+      reported_id: null, // TODO: obtener del usuario logueado
       created_at: new Date().toISOString(),
     });
     resetForm();

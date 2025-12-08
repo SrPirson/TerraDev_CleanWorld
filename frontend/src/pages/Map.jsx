@@ -16,12 +16,14 @@ import NavBar from '../components/NavBar.jsx';
 import Mapa from '../components/Map.jsx';
 import RecyclingMenu from '../components/RecyclingMenu.jsx';
 import ReportModal from '../components/ReportModal.jsx';
+import ZoneDrawer from '../components/ZoneDrawer.jsx';
 
 export default function MapPage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [reportCoords, setReportCoords] = useState(null);
     const [reports, setReports] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
+    const [selectedReport, setSelectedReport] = useState(null);
     
     // Usar directamente searchParams como fuente de verdad
     const isReportMode = searchParams.get("report") === "true";
@@ -44,9 +46,15 @@ export default function MapPage() {
                 id: f.id,
                 latitude: f.latitude,
                 longitude: f.longitude,
-                tooltip: f.properties.tooltip,
+                title: f.properties.tooltip || 'Zona sin título',
+                description: null,
+                img_url: null,
+                after_img_url: null,
+                severity: 'MEDIUM',
+                status: 'SUCIO',
                 residuo: raw.category,
-                severity: f.properties.severity || 1
+                reported_id: null,
+                created_at: null
             }))
         );
 
@@ -72,6 +80,14 @@ export default function MapPage() {
         closeReport();
     };
 
+    const handleReportClick = (report) => {
+        setSelectedReport(report);
+    };
+
+    const handleCloseDrawer = () => {
+        setSelectedReport(null);
+    };
+
     // Filtrar reports:
     // - Si NO hay categorías seleccionadas: solo mostrar reportes de usuario (sin residuo)
     // - Si HAY categorías: mostrar contenedores de esas categorías + todos los reportes de usuario
@@ -88,6 +104,7 @@ export default function MapPage() {
                     reportCoords={reportCoords}
                     isReportMode={isReportMode}
                     reports={filteredReports}
+                    onReportClick={handleReportClick}
                 />
                 <RecyclingMenu
                     selected={selectedCategories}
@@ -98,6 +115,10 @@ export default function MapPage() {
                     reportCoords={reportCoords}
                     onClose={closeReport}
                     onSubmit={handleSubmitReport}
+                />
+                <ZoneDrawer
+                    report={selectedReport}
+                    onClose={handleCloseDrawer}
                 />
             </div>
         </div>
