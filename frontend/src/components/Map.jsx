@@ -3,11 +3,9 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 const severityColors = {
-  1: '#22c55e', // verde
-  2: '#84cc16', // lima
-  3: '#eab308', // amarillo
-  4: '#f97316', // naranja
-  5: '#ef4444', // rojo
+  1: '#5F7336', // leve - verde oscuro (brand-primary)
+  2: '#f97316', // moderada - naranja
+  3: '#ef4444', // grave - rojo
 };
 
 const createPinIcon = (color) => {
@@ -24,13 +22,14 @@ const createPinIcon = (color) => {
 };
 
 // Pin por defecto (para el marcador temporal)
-const DefaultPinIcon = createPinIcon('#5F7336');
+const DefaultPinIcon = createPinIcon('#ec4899'); // rosa fucsia chillón
 
-function MapClickHandler({ onMapClick, isReportMode }) {
+function MapClickHandler({ onMapClick, isReportMode, reportCoords }) {
   const map = useMap();
   useMapEvents({
     click: (e) => {
-      if (onMapClick && isReportMode) {
+      // Permitir clicks si está en modo reporte O si ya hay un reporte abierto (para cambiar ubicación)
+      if (onMapClick && (isReportMode || reportCoords)) {
         onMapClick(e.latlng);
         const offsetLng = e.latlng.lng + 0.002;
         map.flyTo([e.latlng.lat, offsetLng], 18);
@@ -53,7 +52,7 @@ export default function Mapa({ onMapClick, reportCoords, isReportMode, reports =
         url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
       />
 
-      <MapClickHandler onMapClick={onMapClick} isReportMode={isReportMode} />
+      <MapClickHandler onMapClick={onMapClick} isReportMode={isReportMode} reportCoords={reportCoords} />
 
       {/* Marcador temporal */}
       {reportCoords && (
@@ -65,12 +64,16 @@ export default function Mapa({ onMapClick, reportCoords, isReportMode, reports =
         <Marker 
           key={report.id} 
           position={[report.latitude, report.longitude]} 
-          icon={createPinIcon(severityColors[report.severity])}
+          icon={createPinIcon(severityColors[report.severity] || severityColors[2])}
         >
           <Popup>
-            <strong>{report.title}</strong>
-            {report.description && <p className="text-sm">{report.description}</p>}
-            <span className="text-xs">Severidad: {report.severity}/5</span>
+            <div className="p-1">
+              <strong className="text-brand-dark">{report.title}</strong>
+              {report.description && <p className="text-sm text-gray-600 mt-1">{report.description}</p>}
+              <span className="text-xs text-gray-500 mt-1 block">
+                Nivel: {report.severity === 1 ? 'Leve' : report.severity === 2 ? 'Moderado' : 'Grave'}
+              </span>
+            </div>
           </Popup>
         </Marker>
       ))}
