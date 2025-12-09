@@ -1,4 +1,5 @@
 import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from "react-leaflet";
+import { useEffect } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -44,12 +45,41 @@ function MapClickHandler({ onMapClick, isReportMode, reportCoords }) {
   return null;
 }
 
+function SpotlightOverlay({ reportCoords, onPositionUpdate }) {
+  const map = useMap();
+  
+  useEffect(() => {
+    if (!reportCoords || !map) return;
+    
+    const updatePosition = () => {
+      const point = map.latLngToContainerPoint([reportCoords.lat, reportCoords.lng]);
+      const container = map.getContainer();
+      const rect = container.getBoundingClientRect();
+      const x = ((point.x / rect.width) * 100).toFixed(1);
+      const y = (((point.y + 15) / rect.height) * 100).toFixed(1);
+      onPositionUpdate?.({ x, y });
+    };
+    
+    updatePosition();
+    map.on('move', updatePosition);
+    map.on('zoom', updatePosition);
+    
+    return () => {
+      map.off('move', updatePosition);
+      map.off('zoom', updatePosition);
+    };
+  }, [map, reportCoords, onPositionUpdate]);
+  
+  return null;
+}
+
 export default function Mapa({ 
   onMapClick, 
   reportCoords, 
   isReportMode, 
   reports = [],
-  onReportClick 
+  onReportClick,
+  onPinPositionUpdate
 }) {
   return (
     <MapContainer
@@ -64,6 +94,7 @@ export default function Mapa({
       />
 
       <MapClickHandler onMapClick={onMapClick} isReportMode={isReportMode} reportCoords={reportCoords} />
+      <SpotlightOverlay reportCoords={reportCoords} onPositionUpdate={onPinPositionUpdate} />
 
       {/* Marcador temporal */}
       {reportCoords && (
