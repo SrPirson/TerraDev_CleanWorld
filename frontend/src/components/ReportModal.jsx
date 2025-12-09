@@ -37,7 +37,7 @@ const severityOptions = [
   }
 ];
 
-export default function ReportModal({ isReportMode, reportCoords, onClose, onSubmit }) {
+export default function ReportModal({ isReportMode, reportCoords, pinPosition = { x: 50, y: 35 }, onClose, onSubmit }) {
   const [formData, setFormData] = useState(initialFormData);
   const [images, setImages] = useState([]);
 
@@ -111,11 +111,19 @@ export default function ReportModal({ isReportMode, reportCoords, onClose, onSub
   if (!reportCoords) return null;
 
   return (
-    <div className="fixed inset-0 z-9999 flex items-end sm:items-center justify-center bg-black/30 pointer-events-none">
+    <>
       <div 
-        className="bg-white w-full sm:max-w-lg sm:rounded-2xl shadow-2xl max-h-[90vh] flex flex-col relative z-10000 pointer-events-auto"
-        onClick={(e) => e.stopPropagation()}
-      >
+        className="fixed inset-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(circle 250px at ${pinPosition.x}% ${pinPosition.y}%, rgba(0,0,0,0), rgba(0,0,0,0.5))`,
+          zIndex: 9998
+        }}
+      />
+      <div className="fixed inset-0 flex items-end sm:items-center justify-center pointer-events-none" style={{ zIndex: 9999 }}>
+        <div 
+          className="bg-white w-full sm:max-w-lg sm:rounded-2xl shadow-2xl max-h-[90vh] flex flex-col relative pointer-events-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
         {/* Header */}
         <div className="p-5 border-b border-gray-200 flex items-center justify-between shrink-0">
           <div className="flex-1">
@@ -277,6 +285,7 @@ export default function ReportModal({ isReportMode, reportCoords, onClose, onSub
           </div>
         </form>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
